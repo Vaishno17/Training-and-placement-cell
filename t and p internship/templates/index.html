@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Path Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+   
+</head>
+<body>
+
+    <!-- College Logo Banner -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="College Banner">
+    </div>
+
+    <button id="toggle-mode" title="Toggle Theme">🌓</button>
+
+
+        <!-- 🌟 Compact and Smooth Horizontal Carousel -->
+    <div class="carousel">
+        <div class="carousel-track">
+            <img src="{{ url_for('static', filename='1.jpg') }}" alt="Campus">
+            <img src="{{ url_for('static', filename='2.jpg') }}" alt="Placement">
+            <img src="{{ url_for('static', filename='3.jpg') }}" alt="Motivation">
+            <!-- Repeat images for smooth loop -->
+            <img src="{{ url_for('static', filename='1.jpg') }}" alt="Campus Repeat">
+            <img src="{{ url_for('static', filename='2.jpg') }}" alt="Placement Repeat">
+            <img src="{{ url_for('static', filename='3.jpg') }}" alt="Motivation Repeat">
+        </div>
+    </div>
+
+    <h2 class="typewriter-text">👩‍🎓 Welcome to the Career Navigator Portal 📚</h2>
+
+        
+    <!-- Intro Section -->
+<section style="max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px;">
+    <h2 style="color:#0f62fe;">Welcome to the Career Path Portal</h2>
+    <p style="font-size: 1.1rem; color: #555;">
+        This portal helps you choose your post-graduation or placement path with ease. Explore career options,
+        fill the form of your interest, and get guidance based on your inputs.✨
+    </p>
+</section>
+
+    <!-- Title -->
+    <h1>Choose Your Career Path</h1>
+    <p class="subtitle">Explore your interests and fill out the form to begin your journey 🚀</p>
+
+    <!-- Career Options -->
+    <div class="options-container">
+        <a href="/form/mba" class="option-card">
+            <img src="{{ url_for('static', filename='mba.jpg') }}" alt="MBA">
+            <h3>MBA</h3>
+        </a>
+        <a href="/form/ms" class="option-card">
+            <img src="{{ url_for('static', filename='ms.jpg') }}" alt="MS/MTech">
+            <h3>MS / MTech</h3>
+        </a>
+        <a href="/form/job" class="option-card">
+            <img src="{{ url_for('static', filename='job.jpg') }}" alt="Job">
+            <h3>Job</h3>
+        </a>
+    </div>
+    <!-- Highlights Section -->
+<section style="max-width: 1000px; margin: 40px auto; padding: 20px;">
+    <h2 style="text-align: center; color: #0f62fe;">What You Can Do Here</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px;">
+        <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #0f62fe;">📝 Fill Forms</h4>
+            <p>Choose between Job, MS/MTech, or MBA and submit your academic details.</p>
+        </div>
+        <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #0f62fe;">📊 Get Filtered</h4>
+            <p>Your data will be evaluated to check if you’re eligible based on CGPA and skills.</p>
+        </div>
+        <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: #0f62fe;">📁 Exported Reports</h4>
+            <p>Admins can generate Excel reports for T&P decisions and guidance.</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Training & Placement Cell | Built with 💙 by Pranjal
+    </footer>
+
+    <script>
+    document.getElementById("toggle-mode").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+    });
+    </script>
+
+</body>
+</html>

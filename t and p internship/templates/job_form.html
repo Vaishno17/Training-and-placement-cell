@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Training & Placement Registration - Job</title>
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='a.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0f62fe;
+      margin-bottom: 20px;
+    }
+
+    .info-box {
+      background: #f0f4ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .info-box ul {
+      padding-left: 20px;
+    }
+
+    input, select {
+      margin-bottom: 15px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #0f62fe;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #004fc4;
+    }
+
+    .company-logos {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .company-logos img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+
+    .company-logos img:hover {
+      transform: scale(1.1);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .close {
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #4caf50;
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px;
+      position: fixed;
+      z-index: 999;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+    }
+
+    .toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .company-logos {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    
+
+  <div class="container">
+    <h2>Training & Placement Registration - Job</h2>
+
+    <!-- Info Box -->
+    <div class="info-box">
+      <h3>📋 Fill Out Your Placement Details</h3>
+      <p>This form helps the Training & Placement Cell evaluate your eligibility for job recruitment drives.</p>
+      <ul>
+        <li>✅ Fill accurate CGPA and skills.</li>
+        <li>✅ Mention all relevant skills (e.g., Python, Java, SQL).</li>
+        <li>✅ Preferred company helps us understand your goals.</li>
+      </ul>
+      <p><strong>Note:</strong> Your eligibility will be auto-checked based on CGPA & skills after submission.</p>
+    </div>
+
+    <!-- Featured Companies -->
+    <div class="companies-section">
+      <h3>🌟 Featured Companies</h3>
+      <div class="company-logos">
+        <img src="{{ url_for('static', filename='tcs.jpg') }}" alt="TCS" onclick="showInfo('TCS')">
+        <img src="{{ url_for('static', filename='infosys.jpg') }}" alt="Infosys" onclick="showInfo('Infosys')">
+        <img src="{{ url_for('static', filename='google.jpg') }}" alt="Google" onclick="showInfo('Google')">
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="companyModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="placementForm">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="phone" placeholder="Phone Number" required>
+      <select name="branch" required>
+        <option value="">Select Branch</option>
+        <option value="Computer">Computer</option>
+        <option value="IT">IT</option>
+        <option value="EXTC">EXTC</option>
+      </select>
+      <input type="number" name="cgpa" step="0.1" placeholder="CGPA" required>
+      <input type="text" name="skills" placeholder="Skills (comma-separated)" required>
+      <input type="text" name="company" placeholder="Preferred Company" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">✅ Form submitted successfully!</div>
+
+  <script>
+    const form = document.getElementById('placementForm');
+    const toast = document.getElementById('toast');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch('/submit_job', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+        form.reset();
+      })
+      .catch(error => {
+        alert("❌ Something went wrong!");
+        console.error(error);
+      });
+    });
+
+    function showInfo(company) {
+      const modal = document.getElementById("companyModal");
+      const title = document.getElementById("modalTitle");
+      const description = document.getElementById("modalDescription");
+
+      const info = {
+        "TCS": "Tata Consultancy Services (TCS) is a global leader in IT services and consulting. Known for mass recruitment and strong training programs.",
+        "Infosys": "Infosys is an Indian multinational that provides business consulting, IT and outsourcing services. Known for campus placements.",
+        "Google": "Google is a global tech giant, known for innovation and software development roles with high CGPA and skill expectations."
+      };
+
+      title.textContent = company;
+      description.textContent = info[company];
+      modal.style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("companyModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
