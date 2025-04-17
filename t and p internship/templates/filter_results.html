@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #667eea;
+        }
+        .export-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .export-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Filter Results</h1>
+        <div>
+            <a href="{{ url_for('tpo.dashboard') }}" style="color: white;">Dashboard</a> |
+            <a href="{{ url_for('auth.logout') }}" style="color: white;">Logout</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <a href="{{ url_for('tpo.filter_students') }}" class="back-link">← Back to Filter</a>
+        
+        <button class="export-btn" onclick="exportToExcel()">Export to Excel</button>
+        
+        <div class="card">
+            <h2>Filtered Students ({{ students|length }} results)</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Branch</th>
+                        <th>CGPA</th>
+                        <th>Skills</th>
+                        <th>Preferred Company</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.Name }}</td>
+                        <td>{{ student.Email }}</td>
+                        <td>{{ student.Branch }}</td>
+                        <td>{{ student.CGPA }}</td>
+                        <td>{{ student.Skills }}</td>
+                        <td>{{ student['Preferred Company'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        function exportToExcel() {
+            // In a real implementation, this would make an API call to generate an Excel file
+            alert("Export to Excel functionality would be implemented here");
+        }
+    </script>
+</body>
+</html>

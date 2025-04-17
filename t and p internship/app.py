@@ -1,93 +1,36 @@
-from flask import Flask, render_template, request
-from openpyxl import Workbook, load_workbook
-import os
+from flask import session, redirect, url_for
 
-app = Flask(__name__)
+app.secret_key = 'supersecretkey'  # Required for session handling
 
-# Excel file paths
-JOB_EXCEL_FILE = "job_data.xlsx"
-MS_EXCEL_FILE = "ms_data.xlsx"
-MBA_EXCEL_FILE = "mba_data.xlsx"
+# Login Route
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        role = request.form['role']
+        kbt_id = request.form['kbt_id']
+        password = request.form['password']
 
-# Function to initialize Excel file with headers
-def init_excel(file_path, headers):
-    if not os.path.exists(file_path):
-        wb = Workbook()
-        ws = wb.active
-        ws.append(headers)
-        wb.save(file_path)
+        if role == 'student' and kbt_id == 'student123' and password == 'pass':
+            session['user'] = 'student'
+            return redirect(url_for('student_dashboard'))
+        elif role == 'tp' and kbt_id == 'tp123' and password == 'pass':
+            session['user'] = 'tp'
+            return redirect(url_for('tp_dashboard'))
+        else:
+            return "Invalid Credentials"
 
-# Initialize files with headers
-init_excel(JOB_EXCEL_FILE, ["Name", "Email", "Phone", "Branch", "CGPA", "Skills", "Preferred Company"])
-init_excel(MS_EXCEL_FILE, ["Name", "Email", "Phone", "Branch", "CGPA", "Skills", "Location", "Preferred University"])
-init_excel(MBA_EXCEL_FILE, ["Name", "Email", "Phone", "Branch", "CGPA", "Skills", "Preferred B-School"])
+    return render_template('login.html')
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# Dashboards
+@app.route('/student_dashboard')
+def student_dashboard():
+    if session.get('user') != 'student':
+        return redirect(url_for('login'))
+    return render_template('student_form.html')
 
-@app.route('/form/<path>')
-def form_path(path):
-    if path == 'job':
-        return render_template('job_form.html')
-    elif path == 'ms':
-        return render_template('ms_form.html')
-    elif path == 'mba':
-        return render_template('mba_form.html')
-    else:
-        return "<h2>404 - Page Not Found</h2>"
-
-@app.route('/submit_job', methods=['POST'])
-def submit_job():
-    name = request.form['name']
-    email = request.form['email']
-    phone = request.form['phone']
-    branch = request.form['branch']
-    cgpa = request.form['cgpa']
-    skills = request.form['skills']
-    company = request.form['company']
-
-    wb = load_workbook(JOB_EXCEL_FILE)
-    ws = wb.active
-    ws.append([name, email, phone, branch, cgpa, skills, company])
-    wb.save(JOB_EXCEL_FILE)
-
-    return "Job form submitted successfully!"
-
-@app.route('/submit_ms', methods=['POST'])
-def submit_ms():
-    name = request.form['name']
-    email = request.form['email']
-    phone = request.form['phone']
-    branch = request.form['branch']
-    cgpa = request.form['cgpa']
-    skills = request.form['skills']
-    location = request.form['location']
-    university = request.form['university']
-
-    wb = load_workbook(MS_EXCEL_FILE)
-    ws = wb.active
-    ws.append([name, email, phone, branch, cgpa, skills, location, university])
-    wb.save(MS_EXCEL_FILE)
-
-    return "MS form submitted successfully!"
-
-@app.route('/submit_mba', methods=['POST'])
-def submit_mba():
-    name = request.form['name']
-    email = request.form['email']
-    phone = request.form['phone']
-    branch = request.form['branch']
-    cgpa = request.form['cgpa']
-    skills = request.form['skills']
-    bschool = request.form['bschool']
-
-    wb = load_workbook(MBA_EXCEL_FILE)
-    ws = wb.active
-    ws.append([name, email, phone, branch, cgpa, skills, bschool])
-    wb.save(MBA_EXCEL_FILE)
-
-    return "MBA form submitted successfully!"
-
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/tp_dashboard')
+def tp_dashboard():
+    if session.get('user') != 'tp':
+        return redirect(url_for('login'))
+    # Load data for filtering UI
+    return render_template('tpo_dashboard.html')
