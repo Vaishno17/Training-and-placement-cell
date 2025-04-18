@@ -1,0 +1,27 @@
+import sqlite3
+from werkzeug.security import generate_password_hash
+
+# Connect or create the database
+conn = sqlite3.connect('site.db')
+
+# Create a cursor object
+cursor = conn.cursor()
+
+# Create the 'users' table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+)
+''')
+
+# Insert a default user (username: admin, password: admin123)
+hashed_pw = generate_password_hash("admin123")
+cursor.execute("INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)", ("admin", hashed_pw))
+
+# Commit changes and close connection
+conn.commit()
+conn.close()
+
+print("✅ SQLite database created and user inserted.")
