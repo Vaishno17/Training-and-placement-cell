@@ -4,9 +4,76 @@
     <meta charset="UTF-8">
     <title>Career Path Selection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-   
+
+    <style>
+        .carousel {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .carousel-track img {
+            height: 180px;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar img {
+            height: 40px;
+        }
+
+        .login-btn {
+            padding: 8px 16px;
+            background-color: #0f62fe;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .login-btn:hover {
+            background-color: #0061f2;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Top Navbar with Login Button -->
+    <div class="navbar">
+        <!-- Logo (optional, or leave empty) -->
+        <div>
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        </div>
+        
+        <!-- Login Button -->
+        <div>
+            <a href="/login" class="login-btn">Login</a>
+        </div>
+    </div>
 
     <!-- College Logo Banner -->
     <div class="header">
@@ -15,8 +82,7 @@
 
     <button id="toggle-mode" title="Toggle Theme">🌓</button>
 
-
-        <!-- 🌟 Compact and Smooth Horizontal Carousel -->
+    <!-- Carousel Section -->
     <div class="carousel">
         <div class="carousel-track">
             <img src="{{ url_for('static', filename='1.jpg') }}" alt="Campus">
@@ -31,15 +97,14 @@
 
     <h2 class="typewriter-text">👩‍🎓 Welcome to the Career Navigator Portal 📚</h2>
 
-        
     <!-- Intro Section -->
-<section style="max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px;">
-    <h2 style="color:#0f62fe;">Welcome to the Career Path Portal</h2>
-    <p style="font-size: 1.1rem; color: #555;">
-        This portal helps you choose your post-graduation or placement path with ease. Explore career options,
-        fill the form of your interest, and get guidance based on your inputs.✨
-    </p>
-</section>
+    <section style="max-width: 900px; margin: 40px auto; text-align: center; padding: 0 20px;">
+        <h2 style="color:#0f62fe;">Welcome to the Career Path Portal</h2>
+        <p style="font-size: 1.1rem; color: #555;">
+            This portal helps you choose your post-graduation or placement path with ease. Explore career options,
+            fill the form of your interest, and get guidance based on your inputs.✨
+        </p>
+    </section>
 
     <!-- Title -->
     <h1>Choose Your Career Path</h1>
@@ -60,25 +125,25 @@
             <h3>Job</h3>
         </a>
     </div>
-    <!-- Highlights Section -->
-<section style="max-width: 1000px; margin: 40px auto; padding: 20px;">
-    <h2 style="text-align: center; color: #0f62fe;">What You Can Do Here</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px;">
-        <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h4 style="color: #0f62fe;">📝 Fill Forms</h4>
-            <p>Choose between Job, MS/MTech, or MBA and submit your academic details.</p>
-        </div>
-        <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h4 style="color: #0f62fe;">📊 Get Filtered</h4>
-            <p>Your data will be evaluated to check if you’re eligible based on CGPA and skills.</p>
-        </div>
-        <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-            <h4 style="color: #0f62fe;">📁 Exported Reports</h4>
-            <p>Admins can generate Excel reports for T&P decisions and guidance.</p>
-        </div>
-    </div>
-</section>
 
+    <!-- Highlights Section -->
+    <section style="max-width: 1000px; margin: 40px auto; padding: 20px;">
+        <h2 style="text-align: center; color: #0f62fe;">What You Can Do Here</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px;">
+            <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: #0f62fe;">📝 Fill Forms</h4>
+                <p>Choose between Job, MS/MTech, or MBA and submit your academic details.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: #0f62fe;">📊 Get Filtered</h4>
+                <p>Your data will be evaluated to check if you’re eligible based on CGPA and skills.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: #0f62fe;">📁 Exported Reports</h4>
+                <p>Admins can generate Excel reports for T&P decisions and guidance.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>

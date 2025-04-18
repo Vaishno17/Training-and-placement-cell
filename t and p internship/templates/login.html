@@ -1,11 +1,48 @@
-<form method="POST">
-    <h2>Login</h2>
-    <select name="role" required>
-      <option value="student">Student</option>
-      <option value="tp">T&P Officer</option>
-    </select><br>
-    <input type="text" name="kbt_id" placeholder="KBT ID" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <button type="submit">Login</button>
-  </form>
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <!-- College Logo Banner -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="College Banner">
+    </div>
+
+    <!-- Login Form Section -->
+    <div class="login-container">
+        <h2 class="login-title">Login</h2>
+
+        <form method="POST" class="login-form">
+            <label for="role">Role:</label>
+            <select name="role" id="role" required class="input-field">
+                <option value="student">Student</option>
+                <option value="tpo">TPO</option>
+            </select><br><br>
+
+            <label for="kbt_id">KBT ID:</label>
+            <input type="text" name="kbt_id" id="kbt_id" required class="input-field"><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required class="input-field"><br><br>
+
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <!-- Links for Sign Up and Forgot Password -->
+        <div class="login-links">
+            <a href="/signup" class="login-link">Sign Up</a> |
+            <a href="/forgot-password" class="login-link">Forgot Password?</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Training & Placement Cell | Built with 💙 by Pranjal
+    </footer>
+
+</body>
+</html>
