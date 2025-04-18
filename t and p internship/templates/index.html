@@ -47,7 +47,7 @@
         }
 
         .login-btn {
-            padding: 8px 16px;
+            padding: 5px 15px;
             background-color: #0f62fe;
             color: white;
             text-decoration: none;
@@ -65,13 +65,12 @@
     <!-- Top Navbar with Login Button -->
     <div class="navbar">
         <!-- Logo (optional, or leave empty) -->
-        <div>
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
-        </div>
+      
         
         <!-- Login Button -->
         <div>
-            <a href="/login" class="login-btn">Login</a>
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+
         </div>
     </div>
 
@@ -112,18 +111,22 @@
 
     <!-- Career Options -->
     <div class="options-container">
-        <a href="/form/mba" class="option-card">
+       
+        <a href="{{ url_for('mba_form') }}" class="option-card">
             <img src="{{ url_for('static', filename='mba.jpg') }}" alt="MBA">
             <h3>MBA</h3>
         </a>
-        <a href="/form/ms" class="option-card">
-            <img src="{{ url_for('static', filename='ms.jpg') }}" alt="MS/MTech">
-            <h3>MS / MTech</h3>
-        </a>
-        <a href="/form/job" class="option-card">
-            <img src="{{ url_for('static', filename='job.jpg') }}" alt="Job">
-            <h3>Job</h3>
-        </a>
+        
+            <a href="{{ url_for('ms_form') }}" class="option-card">
+                <img src="{{ url_for('static', filename='ms.jpg') }}" alt="MS/MTech">
+                <h3>MS / MTech</h3>
+            </a>
+            <a href="{{ url_for('job_form') }}" class="option-card">
+                <img src="{{ url_for('static', filename='job.jpg') }}" alt="Job">
+                <h3>Job</h3>
+            </a>
+        </div>
+        
     </div>
 
     <!-- Highlights Section -->
