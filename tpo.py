@@ -7,7 +7,7 @@ tpo_bp = Blueprint('tpo', __name__)
 def dashboard():
     if 'user_id' not in session or session.get('role') != 'tpo':
         return redirect(url_for('auth.login'))
-    return render_template('tpo/dashboard.html')
+    return render_template('tpo_dashboard.html')
 
 @tpo_bp.route('/filter-students', methods=['GET', 'POST'])
 def filter_students():
@@ -31,9 +31,9 @@ def filter_students():
             if (float(student_data.get('CGPA', 0)) >= min_cgpa and \
                (not branch or student_data.get('Branch', '').lower() == branch.lower()) and \
                (not skills or all(skill.lower() in student_data.get('Skills', '').lower() 
-                               for skill in skills.split(','))):
+                               for skill in skills.split(',')))):
                 filtered_students.append(student_data)
         
-        return render_template('tpo/results.html', students=filtered_students)
+        return render_template('filter_results.html', students=filtered_students)
     
-    return render_template('tpo/filter.html')
+    return render_template('filter_form.html')
